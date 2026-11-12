@@ -30,18 +30,6 @@ O site é estático e não requer framework, instalação de dependências ou pr
     └── finance.js          # Registros, resumo mensal, extrato e tema
 ```
 
-## Executar localmente
-
-É possível abrir o `index.html` diretamente em um navegador. Para testar em um servidor local, com Python 3 instalado, execute na pasta do projeto:
-
-```bash
-python -m http.server 8000
-```
-
-Depois, acesse <http://localhost:8000>.
-
-O projeto também pode ser publicado como site estático, por exemplo, com o GitHub Pages, mantendo a estrutura de pastas acima.
-
 ## Armazenamento e privacidade
 
 As movimentações são salvas no `localStorage` do navegador, sob a chave `ponto-claro-transactions-v1`; a preferência de tema é salva separadamente. Os dados não são enviados a um servidor pelo código do projeto. Eles ficam associados ao navegador e à origem do site e podem ser apagados ao limpar os dados do site ou do navegador. O projeto não oferece sincronização, backup ou proteção de dados financeiros.
