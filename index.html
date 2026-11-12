@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ponto Claro: um caderno financeiro pessoal para registrar entradas, saídas e acompanhar o saldo mensal.">
+    <meta name="theme-color" content="#082b45">
+    <title>Ponto Claro | Sistema Financeiro pessoal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https//www.sicredi.com.br">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="javascript/finance.js" defer></script>
+</head>
+<body>
+    <a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
+
+    <header class="topbar" id="inicio">
+        <a class="brand" href="#inicio" aria-label="Ponto Claro, início">
+            <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="brand-name">ponto<span>claro</span><small>CONTROLE FINANCEIRO</small></span>
+        </a>
+
+        <nav class="main-nav" aria-label="Navegação principal">
+            <a href="#resumo">Visão do mês</a>
+            <a href="#movimentação">Registrar</a>
+            <a href="#extrato">Extrato</a>
+        </nav>
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Alternar para tema escuro" aria-pressed="false">
+            <span class="theme-toggle-icon" aria-hidden="true">☾</span>
+            <span class="theme-toggle-text">Tema</span>
+        </button>
+        <a class="topbar-link" href="#nova-movimentação">Nova movimentação <span aria-hidden="true">↗</span></a>
+    </header>
+
+    <main id="conteudo">
+        <section class="hero" aria-labelledby="hero-title">
+            <div class="hero-copy">
+                <p class="eyebrow"><span class="eyebrow-line" aria-hidden="true"></span> FINANÇAS PESSOAIS / VISÃO MENSAL</p>
+                <h1 id="hero-title">Seu mês,<br><em>sem pontos cegos</em></h1>
+                <p class="hero-text">Um lugar claro para registrar o que entra, entender o que sai e decidir o próximo passo com tranquilidade.</p>
+                <a class="hero-action" href="#nova-movimentação">Registrar nova movimentação <span aria-hidden="true">→</span></a>
+                <p class="hero-footnote">SIMPLES DE PREENCHER. FÁCIL DE ACOMPANHAR.</p>
+            </div>
+            <figure class="hero-photo">
+                <img src="https://www.sicredi.com.br/media/home/filer_public_thumbnails/filer_public/2025/05/05/home-pf-teste.jpg__1280x569_subsampling-2.webp"
+                alt="Duas mulheres em uma loja realizando uma compra com um cartão, em uma situação cotidiana."
+                fetchpriority="high">
+                <figcaption>Fotografia publicada no portal oficial do Sicredi. Uso demonstrativo, direitos da imagem pertencem ao titular.</figcaption>
+            </figure>
+            <div class="hero-index" aria-hidden="true"><span>01</span><span>02</span><span>03</span></div>
+        </section>
+
+        <section class="month-section" id="resumo" aria-labelledby="summary-title">
+            <div class="section-intro">
+                <div>
+                    <p class="eyebrow">01 / LEITURA DO PERÍODO</p>
+                    <h2 id="summary-title">O mês em três números<span>.</span></h2>
+                </div>
+                <div class="month-control">
+                    <label for="monthFilter">Mês analisado</label>
+                    <input id="monthFilter" name="monthFilter" type="month">
+                </div>
+            </div>
+            <div class="summary-grid" aria-label="Resumo financeiro do mês selecionado">
+                <article class="metric-card metric-balance" id="balanceCard">
+                    <div class="metric-top"><span class="metric-number">01</span><span class="metric-label">PONTO DE EQUILÍBRIO</span></div>
+                    <h3>Salto do período</h3>
+                    <output id="balanceTotal" class="metric-value">R$ 0,00</output>
+                    <p id="balanceCaption">Entradas menos sáidas do mês selecionado.</p>
+                    <span class="balance-symbol" aria-hidden="true">=</span>
+                </article>
+                <article class="metric-card metric-income">
+                    <div class="metric-top"><span class="metric-number">02</span><span class="metric-label">RECURSOS QUE ENTRAM</span></div>
+                    <h3>Total de entradas</h3>
+                    <output id="incomeTotal" class="metric-value">R$ 0,00</output>
+                    <p>Receitas e ganhos registrados.</p>
+                    <span class="metric-symbol" aria-hidden="true">+</span>
+                </article>
+                <article class="metric-card metric-expense">
+                    <div class="metric-top"><span class="metric-number">03</span><span class="metric-label">RECURSOS QUE SAÍRAM</span></div>
+                    <h3>Total de sáidas</h3>
+                    <output id="expenseTotal" class="metric-value">R$ 0,00</output>
+                    <p>Despesas e gastos registrados.</p>
+                    <span class="metric-symbol" aria-hidden="true">-</span>
+                </article>
+            </div>
+            <p id="balanceAlert" class="balance-alert" role="status" aria-live="polite" aria-atomic="true" hidden></p>
+        </section>
+
+        <section class="work-area" aria-label="Cadastro e extrato de movimentações">
+            <section class="entry-panel" id="nova-movimentacao" aria-labelledby="entry-title">
+                <div class="panel-heading">
+                    <p class="eyebrow">02 / REGISTRO DO DIA A DIA</p>
+                    <h2 id="entry-title">Uma movimentação<br><em>de cada vez</em></h2>
+                    <p>Preencha os três campos. A data de hoje é registrada automaticamente.</p>
+                </div>
+                <span class="anchor-alias" id="movimentação"></span>
+                <span class="anchor-alias" id="nova-movimentação"></span>
+                <form id="transactionForm" class="transaction-form">
+                    <div class="form-field">
+                        <label for="description">Descrição</label>
+                        <input id="description" name="description" type="text" maxlength="80" placeholder="Ex.: mercado, salário..." autocomplete="off" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-field">
+                            <label for="amount">Valor (R$)</label>
+                            <input id="amount" name="amount" type="number" min="0.01" step="0.01" inputmode="decimal" placeholder="0,00" required>
+                        </div>
+                        <div class="form-field">
+                            <label for="type">Tipo</label>
+                            <select id="type" name="type" required>
+                                <option value="">Selecione</option>
+                                <option value="income">Entrada</option>
+                                <option value="expense">Saída</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button class="submit-button" type="submit">Adicionar ao extrato <span aria-hidden="true">→</span></button>
+                    <p id="formMessage" class="form-message" role="status" aria-live="polite"></p>
+                </form>
+                <p class="storage-note">Os registros ficam salvos neste navegador. Não informe dados bancários reais.</p>
+            </section>
+
+            <section class="statement-panel" id="extrato" aria-labelledby="statement-title">
+                <div class="panel-heading statement-heading">
+                    <div>
+                        <p class="eyebrow">03 / ACOMPANHAMENTO</p>
+                        <h2 id="statement-title">Extrato do mês</h2>
+                    </div>
+                    <span class="statement-period" id="statementPeriod"></span>
+                </div>
+                <p id="emptyStatement" class="empty-statement">Nenhuma movimentação neste mês. Seus registros aparecerão aqui.</p>
+                <div class="table-wrap">
+                    <table class="transaction-table">
+                        <caption class="visually-hidden">Movimentações do mês selecionado</caption>
+                        <thead>
+                            <tr>
+                                <th scope="col">Descrição</th>
+                                <th scope="col">Data</th>
+                                <th scope="col">Tipo</th>
+                                <th scope="col">Valor</th>
+                                <th scope="col"><span class="visually-hidden">Ação</span></th>
+                            </tr>
+                        </thead>
+                        <tbody id="transactionList"></tbody>
+                    </table>
+                </div>
+            </section>
+        </section>
+
+        <section class="app-reference" aria-labelledby="app-reference-title">
+            <div class="app-reference-copy">
+                <p class="eyebrow">REFERÊNCIA EXTERNA</p>
+                <h2 id="app-reference-title">Organização financeira também no aplicativo</h2>
+                <p>Imagem oficial de divulgação do aplicativo Sicredi, apresentada apenas como referência. Ela não é uma tela deste projeto.</p>
+            </div>
+            <figure class="app-reference-figure">
+                <img src="https://www.sicredi.com.br/media/home/filer_public_thumbnails/filer_public/2024/10/18/aplicativo-home-sicredi.png__547x695_subsampling-2.webp"
+                    alt="Imagem oficial de divulgação do aplicativo Sicredi, exibindo opções como Pix, pagar, receber e movimentações."
+                    loading="lazy">
+                <figcaption>Imagem de referência publicada no portal oficial do Sicredi; não representa uma tela do Ponto Claro.</figcaption>
+            </figure>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <a class="brand footer-brand" href="#inicio" aria-label="Ponto Claro, voltar ao início">
+            <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="brand-name">ponto<span>claro</span><small>CONTROLE FINANCEIRO</small></span>
+        </a>
+        <p>Projeto educativo independente. Não é um serviço oficial do Sicredi.</p>
+    </footer>
+</body>
+</html>
